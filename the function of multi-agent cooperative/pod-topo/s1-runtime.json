@@ -1,0 +1,87 @@
+{
+  "target": "bmv2",
+  "p4info": "build/basic.p4.p4info.txt",
+  "bmv2_json": "build/basic.json",
+  "table_entries": [
+    {
+      "table": "MyIngress.ipv4_lpm",
+      "default_action": true,
+      "action_name": "MyIngress.drop",
+      "action_params": { }
+    },
+    {
+      "table": "MyIngress.ipv4_lpm",
+      "match": {
+        "hdr.ipv4.dstAddr": ["10.0.1.1", 32]
+      },
+      "action_name": "MyIngress.ipv4_forward",
+      "action_params": {
+        "dstAddr": "08:00:00:00:01:11",
+        "port": 1
+      }
+    },
+    {
+      "table": "MyIngress.ipv4_lpm",
+      "match": {
+        "hdr.ipv4.dstAddr": ["10.0.2.2", 32]
+      },
+      "action_name": "MyIngress.ipv4_forward",
+      "action_params": {
+        "dstAddr": "08:00:00:00:02:22",
+        "port": 2
+      }
+    },
+    {
+      "table": "MyIngress.ipv4_lpm",
+      "match": {
+        "hdr.ipv4.dstAddr": ["10.0.3.3", 32]
+      },
+      "action_name": "MyIngress.ipv4_forward",
+      "action_params": {
+        "dstAddr": "08:00:00:00:03:33",
+        "port": 3
+      }
+    },
+	 {
+      "table": "MyIngress.ipv4_lpm_mid",
+      "match": {
+        "hdr.ipv4.dstAddr": ["10.0.4.0", 22]
+      },
+      "action_name": "MyIngress.ipv4_forward_mid",
+      "action_params": {
+        "dstAddr": "08:00:00:00:01:00",
+        "port": 4
+      }
+    },
+    {
+      "table": "MyIngress.ipv4_lpm_up",
+      "match": {
+        "hdr.ipv4.dstAddr": ["10.0.4.0", 22]
+      },
+      "action_name": "MyIngress.ipv4_forward_up",
+      "action_params": {
+        "dstAddr": "08:00:00:00:01:00",
+        "port": 5
+      }
+    },
+    {
+      "table": "MyIngress.ipv4_lpm_down",
+      "match": {
+        "hdr.ipv4.dstAddr": ["10.0.4.0", 22]
+      },
+      "action_name": "MyIngress.ipv4_forward_down",
+      "action_params": {
+        "dstAddr": "08:00:00:00:01:00",
+        "port": 6
+      }
+    },
+    {
+      "table": "MyIngress.swid",
+      "default_action":true,
+      "action_name": "MyIngress.set_swid",
+      "action_params": {
+        "swid": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+10:12:12.136     Main Warn QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'
+10:12:13.405          Warn Could not compile "of" in colorfilters file "/home/p4/.wireshark/colorfilters".
+"of" is neither a field nor a protocol name.
+10:12:13.405          Warn Could not compile "Checksum Errors" in colorfilters file "/home/p4/.wireshark/colorfilters".
+Neither "cdp.checksum_bad" nor "1" are field or protocol names.
