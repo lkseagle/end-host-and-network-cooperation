@@ -25,3 +25,5 @@ The function multi-agent cooperative congestion control:
 2. ~/$: xterm h1 h2 h4 h5
 3. ~/$: h1-> h4: sending a flow. s1: tcpdumo -i s1-eth1 -w s1-eth1.pcap (for performance analysis by wireshark)
 4. ~/$: h2-> h5: doing INT framework for queue analysis. h2: python send.py  h5: python receive.py
+
+Our experiment are make a combination of mininet, INT frameowrk, iperf and wireshark. the main logic expression are shown in ##.P4 file of each directory. 
