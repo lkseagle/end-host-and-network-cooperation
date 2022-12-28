@@ -10,13 +10,16 @@ Firstly, put two engineering experiments into the /p4-tutorials/exercise. for ea
 The function of ack-rate control: 
 1. ~/$: sudo make
 2. ~/$: xterm h1 h2 h4 h5
+
 for different performance analysis:
 firstly, for throughput, rtt, drop, and queue analysis
 3. ~/$: h1->h4 :send a flow for perfromance analysis by iperf. s1: tcpdumo -i s1-eth1 -w s1-eth1.pcap (for performance analysis by wireshark)
 4. ~/$: h2 ->h5 : using INT framework to detect queue length.  h2: python send.py  h5: python receive.py
+
 secondly, for scheduling faireness analysis
 3. ~/$: h1->h4 send three flows for perfromance analysis by iperf. using tcpdump and wireshark to monitor the data in switch 1 eth1 prot.
 finally, according to the wireshark file to make performance analysis.
+
 The function multi-agent cooperative congestion control: 
 1. ~/$: sudo make
 2. ~/$: xterm h1 h2 h4 h5
