@@ -5,7 +5,7 @@ Our experimental based P4. Firstly, the follower should install a P4 executive m
 Then, the follower should recompile the Linux kernel by our linux code (linux-5.4.224).
 The follower should change the current congestion control protocol as Reno for you own virtual machine, because our code is modified based on the Reno original code.
 # working steps
-After completing the above environment configuration， we begin our experiment process. The function of ack-rate control and the function of multi-agent cooperative congestion control are two engineering experiments for different congestion status.
+After completing the above environment configuration, we begin our experiment process. For a clear understanding, we design two demos to shou the function of ack-rate control and the function of multi-agent cooperative congestion control.
 Firstly, put two engineering experiments into the /p4-tutorials/exercise. for each experiments doing the following steps:
 The function of ack-rate control: 
 1. ~/$: sudo make
