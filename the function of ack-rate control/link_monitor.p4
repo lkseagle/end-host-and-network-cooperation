@@ -272,7 +272,7 @@ control MyIngress(inout headers hdr,
         if (hdr.ipv4.isValid()) {
             ipv4_lpm.apply();
 
-		    // 暂时想到的用来区分TCP数据包和ACK包的最好方法就是判断长度了。TCP包的长度可以用IP头中的总长度字段减去首部长度字段来计算得到
+		   
             meta.TCP_length = hdr.ipv4.totalLen - ((bit<16>)hdr.ipv4.ihl << 2);	// standard_metadata.packet_length <= 66,
             
             time_t cur_time = standard_metadata.ingress_global_timestamp;
@@ -308,17 +308,15 @@ control MyIngress(inout headers hdr,
                         max_cwnd_reg.write(0, max_cwnd);
                         cur_cwnd_reg.write(0, cur_cwnd);
 
-                    }else{  // 如果现在时间在拥塞发生时间的100ms以内才会增加ACK字段
+                    }else{  
                         max_cwnd_reg.read(max_cwnd, 0);    // 读出max_cwnd
                         cur_cwnd_reg.read(cur_cwnd, 0);    // 读出cur_cwnd
                         max_cwnd = cur_cwnd;
                         max_cwnd_reg.write(0, max_cwnd);
 
                         bit<32> byte_dropped_cnt;
-                        byte_dropped_cnt_reg.write(byte_dropped_cnt, 0);    // 读出上一次发生拥塞时被丢弃的字节数
-                        //byte_dropped_cnt = byte_dropped_cnt >> 9;  // 丢包字节数除以512，因为内核里窗口是要用wscale放大的，所以这里先除一下，而wscale一般都是9
-                        
-                        
+                        byte_dropped_cnt_reg.read(byte_dropped_cnt, 0);    // 读出上一次发生拥塞时被丢弃的字节数
+                
                         cur_cwnd = cur_cwnd - byte_dropped_cnt >> 1;
                         cur_cwnd_reg.write(0, cur_cwnd);
 
@@ -362,7 +360,7 @@ control MyEgress(inout headers hdr,
         bit<32> byte_cnt;
         bit<32> new_byte_cnt;
         time_t last_time;
-        // time_t cur_time = standard_metadata.egress_global_timestamp;     // 原来是这个，在出口的时间，我改成下面的了。
+        // time_t cur_time = standard_metadata.egress_global_timestamp;    
         time_t cur_time = standard_metadata.ingress_global_timestamp;
         
         byte_cnt_reg.read(byte_cnt, (bit<32>)standard_metadata.egress_port);
@@ -385,8 +383,6 @@ control MyEgress(inout headers hdr,
                     cur_pkt_num = cur_pkt_num + 1;
                     cur_pkt_num_reg.write(0,cur_pkt_num);
                 }
-
-                congestion_time_reg.write(0,(bit<48>)3);    // 把拥塞修改次数写入
             }
         
             hdr.probe_data.push_front(1);
