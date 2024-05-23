@@ -318,6 +318,9 @@ control MyIngress(inout headers hdr,
                         byte_dropped_cnt_reg.read(byte_dropped_cnt, 0);    // 读出上一次发生拥塞时被丢弃的字节数
                 
                         cur_cwnd = cur_cwnd - byte_dropped_cnt >> 1;
+                        if(hdr.tcp.cwnd<cwnd){
+                           cur_cwnd=hdr.tcp.cwnd;	// 与Rwnd进行交互
+                           }
                         cur_cwnd_reg.write(0, cur_cwnd);
 
                         congestion_time = congestion_time - 1;
