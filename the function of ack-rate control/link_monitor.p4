@@ -74,7 +74,7 @@ header my_wnd_t{
 	bit<16>		value;		// 自己设的窗口值
 }
 
-header options_t{		// 只解析12个字节就行，每个TCP都至少会有如下12byte的选项字段，反正最后都会原封不动的封装回去
+header options_t{		// 只解析12个字节就行，每个TCP都至少会有如下12byte的选项字段
 	bit<96>		nop_nop_timeStamps;
 }
 
